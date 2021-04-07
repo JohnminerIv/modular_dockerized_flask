@@ -1,6 +1,11 @@
+from dotenv import load_dotenv
+load_dotenv("../.env") 
 from flask import Flask, send_from_directory
 import os
 
+
+# Database
+from src.database.mongodb import db
 # Modules
 from src.blueprints.auth import routes as auth
 from src.blueprints.landing_page import routes as landing_page

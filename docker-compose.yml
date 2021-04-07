@@ -1,8 +1,15 @@
-  version: '3.7'
+version: '3.7'
 
-  services:
-    web:
-      build: .
-      command: ["gunicorn", "-b", "0.0.0.0:8000", "src.app"]
-      ports:
-        - "8000:8000"
+services:
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: $(DATABASENAME)
+      MONGO_INITDB_ROOT_USERNAME: ${ROOTUSER}
+      MONGO_INITDB_ROOT_PASSWORD: ${ROOTPASS}
+  web:
+    build: .
+    command: ["gunicorn", "-b", "0.0.0.0:8000", "src.app"]
+    ports:
+      - "8000:8000"
